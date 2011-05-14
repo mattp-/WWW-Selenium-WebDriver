@@ -1,0 +1,484 @@
+{
+    "base_url" : "localhost",
+    "version" : "0.01",
+    "formats" : [
+        "json"
+    ],
+    "name": "WebDriver Wire Specification",
+    "authority": "GITHUB:mphill22",
+    "meta": {
+        "documentation": "http://code.google.com/p/selenium/wiki/JsonWireProtocol"
+    }
+    "methods" : {
+        "new_sessionId": {
+            "path": "/sessionId",
+            "method": "POST",
+            "expected_status": [ 302 ],
+            "required_params": [
+                "desiredCapabilities",
+            ]
+        },
+        "get_capabilities": {
+            "path": "/sessionId/:sessionId",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "quit": {
+            "path": "/sessionId/:sessionId",
+            "method": "DELETE",
+            "required_params": [ "sessionId" ]
+        },
+        "set_async_script_timeout": {
+            "path": "/session/:sessionId/timeouts/async_script",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "ms"
+            ]
+        },
+        "set_implicit_wait_timeout": {
+            "path": "/sessionId/:sessionId/timeouts/implicit_wait",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "ms"
+            ]
+        },
+        "get_window_handle": {
+            "path": "/session/:sessionId/window_handle",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "get_window_handles": {
+            "path": "/session/:sessionId/window_handles",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "get_url": {
+            "path": "/session/:sessionId/url",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "set_url": {
+            "path": "/session/:sessionId/url",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "url"
+            ]
+        },
+        "forward": {
+            "path": "/session/:sessionId/forward",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "back": {
+            "/session/:sessionId/back",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "refresh": {
+            "/session/:sessionId/refresh",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "execute": {
+            "path": "session/:session_id/execute",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "script"
+            ],
+            "optional_params": [ "args" ]
+        },
+        "execute_async": {
+            "path": "session/:session_id/execute_async",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "script"
+            ],
+            "optional_params": [ "args" ]
+        },
+        "screenshot": {
+            "path": "session/:session_id/screenshot",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "frame": {
+            "path": "/session/:sessionId/frame",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "set_window": {
+            "path": "/session/:sessionId/window",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "name"
+            ]
+        },
+        "close_window": {
+            "path": "/session/:sessionId/window",
+            "method": "DELETE",
+            "required_params": [ "sessionId" ]
+        },
+        "set_speed": {
+            "path": "/session/:sessionId/speed",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "get_speed": {
+            "path": "/session/:sessionId/speed",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "source": {
+            "path": "/session/:sessionId/source",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "title": {
+            "path": "/session/:sessionId/title",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+
+        // cookie manipulation
+        "get_cookies": {
+            "path": "/session/:sessionId/cookie",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "set_cookie": {
+            "path": "/session/:sessionId/cookie",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "cookie"
+            ]
+        },
+        "delete_cookies": {
+            "path": "/session/:sessionId/cookie",
+            "method": "DELETE",
+            "required_params": [ "sessionId" ]
+        },
+        "delete_named_cookie": {
+            "path": "/session/:sessionId/cookie/:name",
+            "method": "DELETE",
+            "required_params": [
+                "sessionId",
+                "name"
+            ]
+        },
+
+        // element search and manipulation
+        "find_element": {
+            "path": "/session/:sessionId/element",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "using",
+                "value"
+             ]
+        },
+        "find_elements": {
+            "path": "/session/:sessionId/elements",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "using",
+                "value"
+             ]
+        },
+        "get_active_element": {
+            "path": "/session/:sessionId/element/active",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "describe_element": {
+            "path": "/session/:sessionId/element/:id",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "find_child_element": {
+            "path": "/session/:sessionId/element/:id/element",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id",
+                "using",
+                "value"
+            ]
+        },
+        "find_child_elements": {
+            "path": "/session/:sessionId/element/:id/elements",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id",
+                "using",
+                "value"
+            ]
+        },
+        "click_element": {
+            "path": "/session/:sessionId/element/:id/click",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "submit_element": {
+            "path": "/session/:sessionId/element/:id/submit",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "get_element_text": {
+            "path": "/session/:sessionId/element/:id/text",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "get_element_value": {
+            "path": "/session/:sessionId/element/:id/value",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "set_element_value": {
+            "path": "/session/:sessionId/element/:id/value",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id",
+                "value"
+            ]
+        },
+        "modifier": {
+            "path": "/session/:sessionId/modifier",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "value",
+                "isdown"
+             ]
+        },
+        "element_name": {
+            "path": "/session/:sessionId/element/:id/name",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "clear_element": {
+            "path": "/session/:sessionId/element/:id/clear",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "is_element_selected": {
+            "path": "/session/:sessionId/element/:id/selected",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "select_element": {
+            "path": "/session/:sessionId/element/:id/selected",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "toggle_element": {
+            "path": "/session/:sessionId/element/:id/toggle",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "is_element_enabled": {
+            "path": "/session/:sessionId/element/:id/enabled",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "get_element_tag_name": {
+            "path": "/session/:sessionId/element/:id/attribute/:name",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id"
+            ]
+        },
+        "element_equals": {
+            "path": "/session/:sessionId/element/:id/equals/:other",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id",
+                "other"
+            ]
+        },
+        "is_element_displayed": {
+            "path": "/session/:sessionId/element/:id/displayed",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id",
+            ]
+        },
+        "get_element_location": {
+            "path": "/session/:sessionId/element/:id/location",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id",
+            ]
+        },
+        "get_element_location_once_scrolled_into_view": {
+            "path": "/session/:sessionId/element/:id/location_in_view",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id",
+            ]
+        },
+        "get_element_size": {
+            "path": "/session/:sessionId/element/:id/size",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id",
+            ]
+        },
+        "get_element_css_property": {
+            "path": "/session/:sessionId/element/:id/css/:propertyName",
+            "method": "GET",
+            "required_params": [
+                "sessionId",
+                "id",
+            ]
+        },
+        "hover_element": {
+            "path": "/session/:sessionId/element/:id/hover",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id",
+            ]
+        },
+        "drag_element": {
+            "path": "/session/:sessionId/element/:id/drag",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "id",
+                "x",
+                "y"
+            ]
+        },
+
+        // mouse input functions
+        "mouse_move_to": {
+            "path": "/session/:sessionId/moveto",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "element",
+                "xoffset",
+                "yoffset"
+            ]
+        },
+        "click:": {
+            "path": "/session/:sessionId/click",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "button"
+            ]
+        },
+        "double_click": {
+            "path": "/session/:sessionId/doubleclick",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "mouse_down": {
+            "path": "/session/:sessionId/buttondown",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "mouse_up": {
+            "path": "/session/:sessionId/buttonup",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+
+        // screen orientation
+        "get_screen_orientation": {
+            "path": "/session/:sessionId/orientation",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "set_screen_orientation": {
+            "path": "/session/:sessionId/orientation",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "orientation"
+            ]
+        },
+
+        // IME paths
+        "available_engines": {
+            "path": "/session/:sessionId/ime/available_engines",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "active_engine": {
+            "path": "/session/:sessionId/ime/active_engine",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "ime_activated": {
+            "path": "/session/:sessionId/ime/activated",
+            "method": "GET",
+            "required_params": [ "sessionId" ]
+        },
+        "ime_deactivate": {
+            "path": "/session/:sessionId/ime/deactivate",
+            "method": "POST",
+            "required_params": [ "sessionId" ]
+        },
+        "ime_activate": {
+            "path": "/session/:sessionId/ime/activate",
+            "method": "POST",
+            "required_params": [
+                "sessionId",
+                "engine"
+             ]
+        }
+    }
+}
