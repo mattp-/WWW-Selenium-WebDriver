@@ -13,6 +13,18 @@ has 'client' => (
     is         => 'ro',
     isa        => 'Net::HTTP::Spore',
     lazy_build => 1,
+    handles    => {
+        'get' => 'set_url',
+        'current_url' => 'get_url',
+
+
+    }
+);
+
+has 'profile' => (
+    is         => 'rw',
+    isa        => 'Str|Profile',
+    lazy_build => 1
 );
 
 sub _build_client {
@@ -35,6 +47,22 @@ has 'role' => (
     isa      => enum [qw/Remote Firefox IE Chrome/],    # we'll worry about android/iphone another day
     required => 1
 );
+
+# timeouts
+has 'implicit_wait' => (
+    is         => 'rw',
+    isa        => 'Int',
+    lazy_build => 1,
+    trigger    => sub { shift()->client->set_implicit_wait_timeout( $_[0] ) }
+);
+
+has 'script_timeout' => (
+    is         => 'rw',
+    isa        => 'Int',
+    lazy_build => 1,
+    trigger    => sub { shift()->client->set_async_script_timeout( $_[0] ) }
+);
+
 
 sub BUILD {
   my $self = shift;

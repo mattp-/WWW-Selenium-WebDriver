@@ -3,15 +3,16 @@ package WWW::Selenium::WebDriver::Navigator;
 use Moose;
 use namespace::autoclean;
 
-has 'spore' => (
+has 'client' => (
     is       => 'ro',
     isa      => 'Net::HTTP::Spore',
-    required => 1
+    required => 1,
+    handle   => {
+        'to'      => 'set_url',
+        'back'    => 'back',
+        'forward' => 'forward',
+        'refresh' => 'refresh'
+    }
 );
-
-sub to { ... }
-sub back { ... }
-sub forward { ... }
-sub refresh { ... }
 
 __PACKAGE__->meta->make_immutable;
